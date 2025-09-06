@@ -18,7 +18,7 @@ $image_bg = $miniature ? esc_url($miniature['url']) : 'URL_PAR_DEFAUT';
     <h3 class="titre-projet"><?php echo esc_html($titre); ?></h3>
 
     <div class="actions" style="display:flex; gap:10px; align-items:center;">
-        <a href="<?php echo esc_url($lien); ?>" class="projet-button">Voir le projet</a>
+        <a href="<?php echo esc_url($lien); ?>" class="test">Voir le projet</a>
 
         <?php if (!empty($captures) && is_array($captures)) : ?>
         <button type="button"

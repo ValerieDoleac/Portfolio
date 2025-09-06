@@ -101,6 +101,10 @@ main,
     color: #0d1b2a;
 }
 
+.test{ border: 2px solid #fff;
+    color: #fff !important;
+}
+
 /* Carte blanche pour contraster avec le fond */
 .projets-page-wrapper .ct-card {
     background-color: #ffffff;
@@ -150,8 +154,6 @@ main,
     font-size: 3rem;
     margin-bottom: 20px;
 }
-
-
 
 
 .grille-projets {
