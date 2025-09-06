@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",function(){const offcanvas=document.getElementById("offcanvas");if(!offcanvas){return;}
+offcanvas.style.width="100vw";offcanvas.style.left="0";offcanvas.style.maxWidth="100vw";offcanvas.style.backgroundColor="#1a1a1a";});
