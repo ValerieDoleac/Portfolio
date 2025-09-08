@@ -39,6 +39,10 @@ main,
     margin: 0 auto;
 }
 
+.galerie {
+    margin-top: 40px;
+}
+
 .single-projet .galerie {
     display: flex;
     flex-wrap: wrap;
@@ -101,8 +105,11 @@ main,
     color: #0d1b2a;
 }
 
+/* Bouton voir le projet */
 .test{ border: 2px solid #fff;
     color: #fff !important;
+    border-radius: 15px;
+    padding: 5px 10px;
 }
 
 /* Carte blanche pour contraster avec le fond */
@@ -166,7 +173,48 @@ main,
     margin: 0 auto;
 }
 
-/* projets*/
+/* Style du bouton "Voir le site" */
+.projet-lien {
+    display: inline-block;
+    color: #fff; /* Texte blanc */
+    border: 2px solid #fff; /* Contour blanc */
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 15px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.projet-lien:hover {
+    color: #000; /* Texte noir au survol */
+    border: 2px solid #000; /* Contour noir */
+    background-color: transparent;
+}
+
+.retour-projets .btn-retour {
+    display: inline-block;
+    color: #fff; /* Texte blanc */
+    border: 2px solid #fff; /* Contour blanc */
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 15px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+.retour-projets .btn-retour:hover {
+    color: #000; /* Texte noir au survol */
+    border: 2px solid #000; /* Contour noir */
+    background-color: transparent;
+}
+
+/*lightbox*/
+
+
 
 @keyframes fadeInUp {
     from {

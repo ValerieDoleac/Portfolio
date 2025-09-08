@@ -1,74 +1,48 @@
-/* Overlay plein écran */
-.plb-overlay{
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,.9);
-    display: none;                 /* togglé par JS */
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
-}
-.plb-overlay.is-active{ display: flex; }
-.plb-overlay[hidden]{ display: none !important; }
-
-/* Conteneur centré */
-.plb-container{
-    position: relative;
-    max-width: 90vw;
-    max-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* Overlay */
+#lightbox.lightbox-overlay{
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(0,0,0,.92);
+    justify-content:center; align-items:center;
+    z-index:9999; /* au-dessus de tout */
 }
 
-/* Image centrée */
-.plb-img{
-    max-width: 90vw;
-    max-height: 85vh;
-    object-fit: contain;
-    display: block;
+/* Conteneur image + caption */
+#lightbox .lightbox-image-wrapper{
+    position:relative;
+    max-width:90vw; max-height:85vh;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
 }
 
-/* Orientation : on réduit un peu les paysages */
-.plb-container.is-landscape .plb-img{ max-height: 60vh; }
-.plb-container.is-portrait  .plb-img{ max-height: 85vh; max-width: 56vw; }
+#lightbox #lightbox-img{
+    max-width:90vw; max-height:75vh; display:block;
+}
+
+/* Bouton fermer */
+#lightbox .lightbox-close{
+    position:absolute; top:16px; right:20px;
+    background:none; border:0; color:#fff;
+    font-size:32px; line-height:1; cursor:pointer;
+    z-index:10001;
+}
 
 /* Flèches */
-.plb-prev, .plb-next{
-    position: fixed; top: 50%; transform: translateY(-50%);
-    background: none; border: none; color: #fff;
-    font-size: clamp(28px, 4vw, 44px);
-    line-height: 1; padding: .2em .25em; cursor: pointer;
+#lightbox .lightbox-prev, 
+#lightbox .lightbox-next{
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:none; border:0; color:#fff;
+    font-size:36px; line-height:1; cursor:pointer;
+    padding:8px 12px;
+    z-index:10000; /* au-dessus de l'image */
 }
+#lightbox .lightbox-prev{ left:24px; }
+#lightbox .lightbox-next{ right:24px; }
 
-.plb-prev{ left: min(24px, 3vw); }
-.plb-next{ right: min(24px, 3vw); }
+/* Légende */
+#lightbox .lightbox-caption{ color:#fff; font-size:14px; opacity:.9; }
 
-/* Croix de fermeture */
-.plb-close{
-    position: fixed; top: 18px; right: 18px;
-    background: none; border: none; color: #fff;
-    font-size: clamp(28px, 4vw, 42px); cursor: pointer;
-}
+/* Sécurité si un style global masque les boutons */
+#lightbox button{ appearance:none; }
 
-/* Légendes */
-.plb-text{
-    position: fixed; left: 0; right: 0; bottom: 18px;
-    display: flex; gap: 12px; justify-content: center;
-    color: #fff; font-size: 14px;
-    padding: 0 16px; text-align: center;
-    pointer-events: none;
-}
-.plb-title{ font-weight: 600; }
-.plb-cat{ opacity: .85; }
-
-
-
-/* Mobile */
-@media (max-width: 768px){
-    .plb-container{ max-width: 94vw; max-height: 76vh; }
-    .plb-img{ max-width: 94vw; max-height: 76vh; }
-    .plb-prev{ left: 10px; } .plb-next{ right: 10px; }
-    .plb-close{ top: 12px; right: 12px; }
-}
 
 

@@ -1,121 +1,80 @@
-console.log('[PLB] script chargé');
+document.addEventListener('DOMContentLoaded', () => {
+    // Récupère tous les éléments cliquables (liens vers les captures)
+    const items = Array.from(document.querySelectorAll('.captures-projet a.js-lightbox-item'));
+    const overlay = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    const prev = overlay ? overlay.querySelector('.lightbox-prev') : null;
+    const next = overlay ? overlay.querySelector('.lightbox-next') : null;
+    const closeBtn = overlay ? overlay.querySelector('.lightbox-close') : null;
+    const titleEl = overlay ? overlay.querySelector('.lightbox-title') : null;
+    const catEl = overlay ? overlay.querySelector('.lightbox-category') : null;
 
+    if (!overlay || !img || !prev || !next || !closeBtn) {
+        console.warn('[LB] Overlay incomplet ou absent.');
+        return;
+    }
+    if (!items.length) {
+        console.warn('[LB] Aucun élément .js-lightbox-item trouvé.');
+        return;
+    }
 
-(function () {
-    const overlay = document.querySelector('.plb-overlay');
-    const container = overlay?.querySelector('.plb-container');
-    const img = overlay?.querySelector('.plb-img');
-    const btnPrev = overlay?.querySelector('.plb-prev');
-    const btnNext = overlay?.querySelector('.plb-next');
-    const btnClose = overlay?.querySelector('.plb-close');
-    const titleEl = overlay?.querySelector('.plb-title');
-    const catEl = overlay?.querySelector('.plb-cat');
+    // On construit une liste à plat de toutes les images cliquables
+    const gallery = items.map((a, i) => ({
+        href: a.getAttribute('href'),
+        title: a.dataset.title || '',
+        category: a.dataset.category || '',
+        group: a.dataset.group || '', // utile si tu veux restreindre par projet
+        index: i
+    }));
 
-    let items = [];     // [{src,title,cat}]
     let index = 0;
-    let lastFocus = null;
 
-    if (!overlay || !container || !img) return;
-
-    function lockScroll(lock) {
-        document.documentElement.style.overflow = lock ? 'hidden' : '';
-        document.body.style.overflow = lock ? 'hidden' : '';
+    function render(i) {
+        index = (i + gallery.length) % gallery.length; // boucle
+        const g = gallery[index];
+        img.src = g.href;
+        if (titleEl) titleEl.textContent = g.title || '';
+        if (catEl) catEl.textContent = g.category || '';
     }
-
-    function setOrientation() {
-        container.classList.remove('is-landscape', 'is-portrait');
-        const w = img.naturalWidth, h = img.naturalHeight;
-        if (!w || !h) return;
-        container.classList.add(w >= h ? 'is-landscape' : 'is-portrait');
-    }
-
-    function show(i) {
-        if (!items.length) return;
-        index = (i + items.length) % items.length; // wrap
-        const { src, title, cat } = items[index];
-
-        img.removeAttribute('src');
-        titleEl && (titleEl.textContent = title || '');
-        catEl && (catEl.textContent = cat || '');
-
-        img.onload = setOrientation;
-        img.src = src;
-
-        overlay.hidden = false;
-        overlay.classList.add('is-active');
+    function open(i) {
+        render(i);
+        overlay.style.display = 'flex';
         overlay.setAttribute('aria-hidden', 'false');
-        lockScroll(true);
-        btnClose?.focus();
+        document.body.style.overflow = 'hidden';
     }
-
-    function hide() {
-        overlay.classList.remove('is-active');
+    function close() {
+        overlay.style.display = 'none';
         overlay.setAttribute('aria-hidden', 'true');
-        overlay.hidden = true;
-        lockScroll(false);
-        lastFocus && lastFocus.focus();
+        document.body.style.overflow = '';
     }
 
-    function next() { show(index + 1); }
-    function prev() { show(index - 1); }
-
-    // Clicks sur déclencheurs
-    document.addEventListener('click', function (e) {
-        const trigger = e.target.closest('a.js-lightbox, button.js-open-gallery');
-        if (!trigger) return;
-
-        // 1) Bouton "Aperçu" d'une carte projet
-        if (trigger.matches('button.js-open-gallery')) {
-            const card = trigger.closest('.carte-projet');
-            if (!card) return;
-            const links = [...card.querySelectorAll('.captures-projet a.js-lightbox')];
-            if (!links.length) return;
+    // Clic sur vignettes -> ouvre
+    items.forEach((a) => {
+        a.addEventListener('click', (e) => {
             e.preventDefault();
-            lastFocus = trigger;
-            items = links.map(a => ({
-                src: a.getAttribute('href') || a.dataset.src,
-                title: a.dataset.title || '',
-                cat: a.dataset.category || ''
-            }));
-            show(0);
-            return;
-        }
-
-        // 2) Clic direct sur une vignette d'un groupe
-        const group = trigger.dataset.lbGroup;
-        if (!group) return; // pas un item lightbox => on laisse le lien normal
-        e.preventDefault();
-        lastFocus = trigger;
-
-        const groupLinks = [...document.querySelectorAll(`a.js-lightbox[data-lb-group="${group}"]`)];
-        items = groupLinks.map(a => ({
-            src: a.getAttribute('href') || a.dataset.src,
-            title: a.dataset.title || '',
-            cat: a.dataset.category || ''
-        }));
-        const start = Math.max(0, groupLinks.indexOf(trigger));
-        show(start);
+            const i = gallery.findIndex(g => g.href === a.getAttribute('href'));
+            open(i >= 0 ? i : 0);
+        });
     });
 
     // Contrôles
-    btnNext?.addEventListener('click', next);
-    btnPrev?.addEventListener('click', prev);
-    btnClose?.addEventListener('click', hide);
-
-    // Fermer en cliquant hors de l'image
-    overlay.addEventListener('click', (e) => {
-        const inside = e.target.closest('.plb-container, .plb-prev, .plb-next, .plb-close');
-        if (!inside) hide();
-    });
+    prev.addEventListener('click', () => render(index - 1));
+    next.addEventListener('click', () => render(index + 1));
+    closeBtn.addEventListener('click', close);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
 
     // Clavier
     document.addEventListener('keydown', (e) => {
-        if (overlay.classList.contains('is-active')) {
-            if (e.key === 'Escape') hide();
-            if (e.key === 'ArrowRight') next();
-            if (e.key === 'ArrowLeft') prev();
-        }
+        if (overlay.getAttribute('aria-hidden') === 'true') return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') render(index - 1);
+        if (e.key === 'ArrowRight') render(index + 1);
     });
-})();
+
+    // Debug rapide si besoin
+    console.log('[LB] OK. Items:', gallery.length);
+});
+
+
 
 

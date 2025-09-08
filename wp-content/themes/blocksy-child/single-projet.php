@@ -31,7 +31,7 @@
         <p><strong>Technologies :</strong> <?= esc_html($technologies); ?></p>
 
         <?php if ($lien) : ?>
-            <p><a href="<?= esc_url($lien); ?>" target="_blank">Voir le site</a></p>
+            <p><a href="<?= esc_url($lien); ?>" target="_blank" class="projet-lien">Voir le site</a></p>
         <?php endif; ?>
 
         <div class="galerie">
@@ -49,28 +49,17 @@
         </div>
 
 
-        <div id="lightbox-overlay" class="lightbox-overlay">
-            <button class="lightbox-close">&times;</button>
-
-            <button class="lightbox-prev">←</button>
-
-            <div class="lightbox-image-wrapper">
-                <img id="lightbox-image" src="" alt="Image lightbox">
-            </div>
-
-            <button class="lightbox-next">→</button>
+        <div class="retour-projets">
+            <a href="<?php echo get_post_type_archive_link('projet'); ?>" class="btn-retour">
+                Retour aux projets
+            </a>
         </div>
-
     </section>
 
     <?php endwhile; endif; ?>
 </main>
 
-<div class="retour-projets">
-    <a href="<?php echo get_post_type_archive_link('projet'); ?>" class="btn-retour">
-        ← Retour aux projets
-    </a>
-</div>
+
 
 
 
