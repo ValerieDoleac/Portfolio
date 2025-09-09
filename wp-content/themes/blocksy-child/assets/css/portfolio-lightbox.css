@@ -1,48 +1,96 @@
-/* Overlay */
+/* ==== OVERLAY ========================================================== */
 #lightbox.lightbox-overlay{
-    display:none;
+    display:none;                    /* JS passe en flex pour ouvrir */
     position:fixed; inset:0;
     background:rgba(0,0,0,.92);
     justify-content:center; align-items:center;
-    z-index:9999; /* au-dessus de tout */
+    z-index:100000;                  /* bien au-dessus de tout (admin bar, headers, etc.) */
+    overflow:auto;                   /* au cas où l'image dépasse en hauteur (petits écrans) */
+    -webkit-overflow-scrolling: touch;
 }
 
-/* Conteneur image + caption */
+/* petite anim d'apparition */
+#lightbox[aria-hidden="false"] .lightbox-image-wrapper{
+    animation: lb-zoom .18s ease;
+}
+
+@keyframes lb-zoom{
+    from{ transform:scale(.98); opacity:.6; }
+    to  { transform:scale(1);   opacity:1; }
+}
+
+/* ==== CONTENU ========================================================== */
 #lightbox .lightbox-image-wrapper{
     position:relative;
     max-width:90vw; max-height:85vh;
-    display:flex; flex-direction:column; align-items:center; gap:8px;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
 }
 
 #lightbox #lightbox-img{
     max-width:90vw; max-height:75vh; display:block;
+    user-select:none; -webkit-user-drag:none;   /* évite le drag de l'image */
+    border-radius:6px;
 }
 
-/* Bouton fermer */
+/* Légende sous l'image */
+#lightbox .lightbox-caption{
+    color:#fff; font-size:14px; line-height:1.4; opacity:.9;
+    text-align:center;
+}
+
+/* ==== BOUTON FERMER ==================================================== */
 #lightbox .lightbox-close{
-    position:absolute; top:16px; right:20px;
-    background:none; border:0; color:#fff;
+    position:absolute; top:14px; right:18px;
+    background:rgba(0,0,0,.35);
+    border:0; color:#fff;
     font-size:32px; line-height:1; cursor:pointer;
-    z-index:10001;
+    padding:4px 10px; border-radius:8px;
+    z-index:100010;
 }
 
-/* Flèches */
-#lightbox .lightbox-prev, 
+/* ==== FLECHES ========================================================== */
+#lightbox .lightbox-prev,
 #lightbox .lightbox-next{
     position:absolute; top:50%; transform:translateY(-50%);
-    background:none; border:0; color:#fff;
+    background:rgba(0,0,0,.35);
+    border:0; color:#fff;
     font-size:36px; line-height:1; cursor:pointer;
-    padding:8px 12px;
-    z-index:10000; /* au-dessus de l'image */
+    padding:10px 14px; border-radius:10px;
+    z-index:100005;
+    transition:opacity .15s ease, transform .15s ease;
 }
-#lightbox .lightbox-prev{ left:24px; }
-#lightbox .lightbox-next{ right:24px; }
+#lightbox .lightbox-prev{ left:18px; }
+#lightbox .lightbox-next{ right:18px; }
 
-/* Légende */
-#lightbox .lightbox-caption{ color:#fff; font-size:14px; opacity:.9; }
+#lightbox .lightbox-prev:hover,
+#lightbox .lightbox-next:hover,
+#lightbox .lightbox-close:hover{
+    background:rgba(0,0,0,.5);
+}
 
-/* Sécurité si un style global masque les boutons */
-#lightbox button{ appearance:none; }
+/* Focus clavier clairement visible */
+#lightbox .lightbox-prev:focus,
+#lightbox .lightbox-next:focus,
+#lightbox .lightbox-close:focus{
+    outline:2px solid #fff; outline-offset:2px;
+}
+
+/* Sécurité si un style global touche les boutons */
+#lightbox button{ appearance:none; pointer-events:auto; }
+
+/* Forcer l’ouverture de la lightbox si aria-hidden="false" */
+.lightbox-overlay[aria-hidden="false"] { display: flex !important; }
+
+
+/* ==== RESPONSIVE ======================================================= */
+@media (max-width: 768px){
+    #lightbox #lightbox-img{ max-height:65vh; }
+    #lightbox .lightbox-prev,
+    #lightbox .lightbox-next{ font-size:30px; padding:8px 12px; }
+    #lightbox .lightbox-prev{ left:8px; }
+    #lightbox .lightbox-next{ right:8px; }
+    #lightbox .lightbox-close{ top:10px; right:12px; font-size:28px; }
+}
 
 
 

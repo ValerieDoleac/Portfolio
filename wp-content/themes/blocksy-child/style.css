@@ -32,47 +32,73 @@ main,
 }
 
 .single-projet .miniature img,
-.single-projet .galerie img {
+.single-projet .galerie-projet img {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
 }
 
-.galerie {
+.galerie-projet{
     margin-top: 40px;
 }
 
-.single-projet .galerie {
-    display: flex;
-    flex-wrap: wrap;
+.single-projet .galerie-projet {
+    list-style:none;
+    margin:40px auto 60px;
+    padding:0;
+    max-width:1200px;
+    display:grid;
+    margin-left: 20px;
+    margin-right: 20px;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
+    gap:32px;
+}
+
+/* Carte générique */
+.single-projet .galerie-projet li a{
+    display:block;
+    position:relative;
+    width:100%;
+    overflow:hidden;
+    border-radius:10px;
+    background:#111;                 /* évite flash blanc au chargement */
+}
+
+/* On garde le ratio sans déformer les images */
+.single-projet .galerie-projet li a.paysage{
+    aspect-ratio: 16 / 10;           /* paysage */
+}
+.single-projet .galerie-projet li a.portrait{
+    aspect-ratio: 3 / 4;             /* portrait */
     justify-content: center;
-    gap: 20px;
 }
 
-/* Images paysage sur la ligne du haut */
-.single-projet .galerie .paysage {
-    width: 30%;
+/* Portrait — override le width:100% pour centrer */
+.single-projet .galerie-projet li a.portrait{
+    aspect-ratio: 3 / 4;
+    width:80%;               /* <- au lieu de 100% */
+    max-width: 380px;        /* limite optionnelle */
+    margin:0 auto;           /* <- centre dans la colonne */
 }
 
-/* Images portrait sur la ligne du bas */
-.single-projet .galerie .portrait {
-    width: 15%;
+/* L'image remplit la carte sans se déformer */
+.single-projet .galerie-projet li a img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition: transform .3s ease;
+    border-radius: 10px;
 }
 
-/* Style commun */
-.single-projet .galerie a {
-    display: block;
-    border-radius: 5px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
 
-.single-projet .galerie a:hover {
+
+.single-projet .galerie-projet a:hover {
     transform: scale(1.05);
 }
 
-.single-projet .galerie img {
+.single-projet .galerie-projet img {
     width: 100%;
     height: auto;
     display: block;
@@ -176,14 +202,13 @@ main,
 /* Style du bouton "Voir le site" */
 .projet-lien {
     display: inline-block;
-    color: #fff; /* Texte blanc */
+    color: #fff!important; /* Texte blanc */
     border: 2px solid #fff; /* Contour blanc */
     padding: 5px 10px;
     text-decoration: none;
     border-radius: 15px;
     font-weight: bold;
     margin-top: 30px;
-    margin-bottom: 30px;
     transition: all 0.3s ease;
 }
 
@@ -426,26 +451,27 @@ main,
         width: 100vw;
     }
 
-    .single-projet .galerie {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
+    .single-projet .galerie-projet {
+        grid-template-columns: 1fr; gap:16px; 
     }
-    
-    .single-projet .galerie .paysage,
-    .single-projet .galerie .portrait {
+
+    .single-projet .galerie-projet li a.portrait{ 
+        width:100%;
+    }
+
+    .single-projet .galerie-projet .paysage,
+    .single-projet .galerie-projet .portrait {
         width: 90%; /* pleine largeur mais avec un peu de marge */
     }
 
 /* Réduction des images en portrait uniquement */
-    .single-projet .galerie .portrait img {
+    .single-projet .galerie-projet .portrait img {
         height: auto;
         max-height: none;
         object-fit: contain; /* plus de recadrage */
     }
-    
-    .single-projet .galerie a {
+
+    .single-projet .galerie-projet a {
         display: block;
         width: 90%;
         max-width: 500px;
@@ -455,7 +481,7 @@ main,
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
 
-    .single-projet .galerie img {
+    .single-projet .galerie-projet img {
         width: 100%;
         height: auto;
         display: block;
