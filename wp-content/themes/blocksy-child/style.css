@@ -16,8 +16,9 @@ main,
     background: linear-gradient(135deg, #9b51e0, #ff6f61); /* Ton fond dégradé */
 }
 
-.miniature{
-    margin-bottom: 30px;
+.projet-miniature{
+    margin-top: 30px;
+    margin-bottom: 50px;
 }
 
 .single-projet {
@@ -132,7 +133,8 @@ main,
 }
 
 /* Bouton voir le projet */
-.test{ border: 2px solid #fff;
+.test{ 
+    border: 2px solid #fff;
     color: #fff !important;
     border-radius: 15px;
     padding: 5px 10px;
@@ -202,14 +204,32 @@ main,
 /* Style du bouton "Voir le site" */
 .projet-lien {
     display: inline-block;
-    color: #fff!important; /* Texte blanc */
-    border: 2px solid #fff; /* Contour blanc */
-    padding: 5px 10px;
-    text-decoration: none;
-    border-radius: 15px;
-    font-weight: bold;
     margin-top: 30px;
-    transition: all 0.3s ease;
+    padding: 12px 24px;
+    background: transparent;   /* 👈 fond transparent */
+    color: #fff;               /* 👈 texte blanc */
+    border: 2px solid #fff;    /* 👈 bordure blanche */
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .3s;
+}
+.voir-projet{
+    display: inline-block;
+    padding: 10px 20px;
+    background: transparent;   /* 👈 fond transparent */
+    color: #fff !important;               /* 👈 texte blanc */
+    border: 2px solid #fff;    /* 👈 bordure blanche */
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .3s;
+}
+
+.voir-projet:hover {
+    color: #000; /* Texte noir au survol */
+    border: 2px solid #000; /* Contour noir */
+    background-color: transparent;
 }
 
 .projet-lien:hover {
@@ -220,15 +240,14 @@ main,
 
 .retour-projets .btn-retour {
     display: inline-block;
-    color: #fff; /* Texte blanc */
-    border: 2px solid #fff; /* Contour blanc */
-    padding: 10px 15px;
+    padding: 12px 24px;
+    background: transparent;   /* 👈 fond transparent */
+    color: #fff;               /* 👈 texte blanc */
+    border: 2px solid #fff;    /* 👈 bordure blanche */
+    border-radius: 30px;
+    font-weight: 600;
     text-decoration: none;
-    border-radius: 15px;
-    font-weight: bold;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    transition: all 0.3s ease;
+    transition: all .3s;
 }
 
 .retour-projets .btn-retour:hover {
@@ -236,9 +255,6 @@ main,
     border: 2px solid #000; /* Contour noir */
     background-color: transparent;
 }
-
-/*lightbox*/
-
 
 
 @keyframes fadeInUp {

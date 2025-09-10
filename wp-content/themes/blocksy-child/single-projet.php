@@ -78,12 +78,19 @@ get_header();
             </ul>
         </section>
         <?php endif; ?>
+
+                <!-- Bouton retour -->
+        <div class="retour-projets">
+            <a href="<?php echo get_post_type_archive_link('projet'); ?>" class="btn-retour">
+                Retour aux projets
+            </a>
+        </div>
     </section>
 
     <!-- Overlay Lightbox (une seule fois sur la page) -->
     <div id="lightbox" class="lightbox-overlay" aria-hidden="true" role="dialog" aria-label="<?php esc_attr_e('Galerie du projet','textdomain'); ?>">
         <button class="lightbox-close" aria-label="<?php esc_attr_e('Fermer','textdomain'); ?>">×</button>
-        <button class="lightbox-prev"  aria-label="<?php esc_attr_e('Image précédente','textdomain'); ?>">←</button>
+        <button class="lightbox-prev"  aria-label="<?php esc_attr_e('Image précédente','textdomain'); ?>">Précédente</button>
 
     <div class="lightbox-image-wrapper" role="document">
         <img id="lightbox-img" src="" alt="">
@@ -93,7 +100,7 @@ get_header();
         </div>
     </div>
 
-    <button class="lightbox-next"  aria-label="<?php esc_attr_e('Image suivante','textdomain'); ?>">→</button>
+    <button class="lightbox-next"  aria-label="<?php esc_attr_e('Image suivante','textdomain'); ?>">Suivante</button>
     </div>
 
 <?php endwhile; endif; ?>

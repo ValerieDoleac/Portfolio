@@ -41,22 +41,6 @@ get_header(); ?>
 
 </main>
 
-<!-- Lightbox (UNE SEULE FOIS sur la page) -->
-<div id="lightbox" class="lightbox-overlay" aria-hidden="true" role="dialog" aria-label="Galerie de projets">
-    <button class="lightbox-close" aria-label="Fermer">×</button>
-    <button class="lightbox-prev" aria-label="Image précédente">←</button>
-
-    <div class="lightbox-image-wrapper" role="document">
-        <img id="lightbox-img" src="" alt="">
-        <div class="lightbox-caption">
-            <span class="lightbox-title"></span>
-            <span class="lightbox-category"></span>
-        </div>
-    </div>
-
-    <button class="lightbox-next" aria-label="Image suivante">→</button>
-</div>
-
 
 <?php get_footer(); ?>
 
