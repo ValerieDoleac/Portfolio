@@ -9,16 +9,17 @@ Tags: accessibility-ready,blog,block-patterns,e-commerce,wide-blocks,block-style
 Version: 2.1.4.1754324197
 Updated: 2025-08-04 18:16:37
 
-*/
+/* Fond */
 main,
 .site-main,
 .main-container {
-    background: linear-gradient(135deg, #9b51e0, #ff6f61); /* Ton fond dégradé */
+    background: linear-gradient(135deg, #9b51e0, #ff6f61);
 }
 
-.projet-miniature{
-    margin-top: 30px;
-    margin-bottom: 50px;
+/* Single projet */
+.projet-miniature { 
+    margin-top: 30px; 
+    margin-bottom: 50px; 
 }
 
 .single-projet {
@@ -40,130 +41,128 @@ main,
     margin: 0 auto;
 }
 
-.galerie-projet{
-    margin-top: 40px;
-}
+.galerie-projet { margin-top: 40px; }
 
+/* Galerie (grid)  */
 .single-projet .galerie-projet {
-    list-style:none;
-    margin:40px auto 60px;
-    padding:0;
-    max-width:1200px;
-    display:grid;
+    list-style: none;
+    margin: 40px auto 60px;
+    padding: 0;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
     margin-left: 20px;
     margin-right: 20px;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes */
-    gap:32px;
 }
 
-/* Carte générique */
-.single-projet .galerie-projet li a{
-    display:block;
-    position:relative;
-    width:100%;
-    overflow:hidden;
-    border-radius:10px;
-    background:#111;                 /* évite flash blanc au chargement */
+/* Vignette générique */
+.single-projet .galerie-projet li a {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #111;
 }
 
-/* On garde le ratio sans déformer les images */
-.single-projet .galerie-projet li a.paysage{
-    aspect-ratio: 16 / 10;           /* paysage */
+/* Ratios */
+.single-projet .galerie-projet li a.paysage  { 
+    aspect-ratio: 16 / 10; 
 }
-.single-projet .galerie-projet li a.portrait{
-    aspect-ratio: 3 / 4;             /* portrait */
+
+.single-projet .galerie-projet li a.portrait {
+    aspect-ratio: 3 / 4;
+    width: 80%;
+    max-width: 380px;
+    margin: 0 auto;         /* centre la vignette portrait */
     justify-content: center;
 }
 
-/* Portrait — override le width:100% pour centrer */
-.single-projet .galerie-projet li a.portrait{
-    aspect-ratio: 3 / 4;
-    width:80%;               /* <- au lieu de 100% */
-    max-width: 380px;        /* limite optionnelle */
-    margin:0 auto;           /* <- centre dans la colonne */
-}
-
-/* L'image remplit la carte sans se déformer */
-.single-projet .galerie-projet li a img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
+/* Image dans la carte */
+.single-projet .galerie-projet li a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
     transition: transform .3s ease;
     border-radius: 10px;
 }
 
-
-
-.single-projet .galerie-projet a:hover {
-    transform: scale(1.05);
+/* Effet hover */
+.single-projet .galerie-projet li a:hover img { 
+    transform: scale(1.05); 
 }
 
-.single-projet .galerie-projet img {
-    width: 100%;
-    height: auto;
-    display: block;
+/* Page projets */
+.hero-projets { padding: 20px 20px 40px; 
+    text-align: center; 
+    color: #0d1b2a; 
 }
 
-.hero-projets {
-    padding: 20px 20px;
-    padding-bottom: 40px;
-    text-align: center;
-    color: #0d1b2a;
+.hero-projets .titre-projets { 
+    font-size: 3rem; 
+    font-weight: bold; 
+    margin: 0; 
 }
 
-.hero-projets .titre-projets {
-    font-size: 3rem;
-    font-weight: bold;
-    margin: 0;
+.projets-page-wrapper { 
+    min-height: 100vh; 
+    padding-bottom: 100px; 
 }
 
-/* Applique le fond dégradé sur toute la page projets */
-.projets-page-wrapper {
-    min-height: 100vh;
-    padding-bottom: 100px;
-}
-
-/* Assure une bonne lecture des textes sur le fond */
 .projets-page-wrapper h2,
 .projets-page-wrapper .entry-meta,
 .projets-page-wrapper a,
-.projets-page-wrapper .entry-content {
-    color: #0d1b2a;
+.projets-page-wrapper .entry-content { 
+    color: #0d1b2a; 
 }
 
-/* Bouton voir le projet */
-.test{ 
-    border: 2px solid #fff;
+/* Boutons cartes / liens*/
+.projet-lien,
+.voir-projet {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(to right, #e27ba3, #c883f4);
     color: #fff !important;
-    border-radius: 15px;
-    padding: 5px 10px;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .3s;
+}
+.voir-projet { 
+    padding: 6px 10px; 
 }
 
-/* Carte blanche pour contraster avec le fond */
+.projet-lien:hover,
+.voir-projet:hover {
+    color: #000 !important;
+    border-color: #000;
+    background-color: #E0B3FF;
+}
+
+/* Cartes (archive) */
 .projets-page-wrapper .ct-card {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* Corrige le container interne si besoin */
-.projets-page-wrapper .ct-container {
-    background: transparent;
+.projets-page-wrapper .ct-container { 
+    background: transparent; 
 }
 
-/* Grille des projets sur 2 colonnes */
+/* Grille des projets (archive) */
 .entries {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centre les cartes horizontalement */
-    gap: 40px; /* Espace entre les cartes */
-    max-width: 1200px; /* Largeur max pour centrer proprement */
-    margin: 0 auto; /* Centre le container */
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 40px 20px;
 }
 
-/* Style des cartes projets */
 .entries .entry-card {
     background: #fff;
     padding: 30px;
@@ -173,102 +172,30 @@ main,
     flex-direction: column;
     justify-content: center;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    width: calc(50% - 40px); 
 }
 
-.entries .entry-card h2, 
+.entries .entry-card h2,
 .entries .entry-card .entry-title {
     text-align: center;
     margin: 0 auto 20px;
     font-size: 1.5rem;
 }
 
-/* Titre centré */
+/* Titre de l’archive */
 .projets-archive h2.page-title {
     text-align: center;
     font-size: 3rem;
     margin-bottom: 20px;
 }
 
-
-.grille-projets {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    justify-content: center;
-    padding: 40px 20px;
-    max-width: 1100px; /* Tu peux ajuster selon ton besoin */
-    margin: 0 auto;
-}
-
-/* Style du bouton "Voir le site" */
-.projet-lien {
-    display: inline-block;
-    margin-top: 30px;
-    padding: 12px 24px;
-    background: linear-gradient(to right, #e27ba3, #c883f4); /* 👈 fond dégradé */
-    color: #fff;               /* 👈 texte blanc */
-    border: 2px solid #fff;    /* 👈 bordure blanche */
-    border-radius: 30px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all .3s;
-}
-.voir-projet{
-    display: inline-block;
-    padding: 6px 10px;
-    background: linear-gradient(to right, #e27ba3, #c883f4); /* 👈 fond dégradé */
-    color: #fff !important;               /* 👈 texte blanc */
-    border: 2px solid #fff;    /* 👈 bordure blanche */
-    border-radius: 30px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all .3s;
-}
-
-.voir-projet:hover {
-    color: #000!important; /* Texte noir au survol */
-    border: 2px solid #000; /* Contour noir */
-    background-color: #E0B3FF;
-}
-
-.projet-lien:hover {
-    color: #000!important; /* Texte noir au survol */
-    border: 2px solid #000; /* Contour noir */
-    background-color: #E0B3FF;
-}
-
-.retour-projets .btn-retour {
-    display: inline-block;
-    padding: 12px 24px;
-    background: linear-gradient(to right, #e27ba3, #c883f4); /* 👈 fond dégradé */
-    color: #fff;               /* 👈 texte blanc */
-    border: 2px solid #fff;    /* 👈 bordure blanche */
-    border-radius: 30px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all .3s;
-}
-
-.retour-projets .btn-retour:hover {
-    color: #000; /* Texte noir au survol */
-    border: 2px solid #000; /* Contour noir */
-    background-color: #E0B3FF;
-}
-
-
+/* Cartes projets avec overlay (image + titre + bouton) */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .carte-projet {
+    position: relative;
     aspect-ratio: 1 / 1;
     width: 100%;
     max-width: 500px;
@@ -276,7 +203,6 @@ main,
     background-position: center;
     border-radius: 10px;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease;
@@ -284,94 +210,89 @@ main,
     animation: fadeInUp 0.8s ease forwards;
 }
 
-/* Apparition en cascade */
-.carte-projet:nth-child(1) { 
-    animation-delay: 0.2s; 
-}
-.carte-projet:nth-child(2) { 
-    animation-delay: 0.4s; 
-}
-.carte-projet:nth-child(3) { 
-    animation-delay: 0.6s; 
-}
-.carte-projet:nth-child(4) { 
-    animation-delay: 0.8s; 
+.carte-projet:nth-child(1) { animation-delay: .2s; }
+.carte-projet:nth-child(2) { animation-delay: .4s; }
+.carte-projet:nth-child(3) { animation-delay: .6s; }
+.carte-projet:nth-child(4) { animation-delay: .8s; }
+
+.carte-projet:hover { 
+    transform: scale(1.03); 
 }
 
-.carte-projet:hover {
-    transform: scale(1.03);
-}
-
+/* dégradé bas */
 .carte-projet::before {
     content: "";
     position: absolute;
-    border-radius: 10px;
     left: 0; right: 0; bottom: 0;
-    height: 30%; /* zone couverte en bas */
+    height: 30%;
+    border-radius: 10px;
     background: linear-gradient(to top, rgba(0,0,0,1), transparent);
     z-index: 0;
 }
 
+/* barre du bas (titre + bouton) */
 .carte-projet .overlay {
     position: absolute;
     inset: 0;
     background: none;
     display: flex;
-    justify-content: space-between;   /* Titre à gauche, bouton à droite */
-    align-items: flex-end;            /* Collé en bas */
+    justify-content: space-between;
+    align-items: flex-end;
     padding: 20px;
     color: #fff;
     z-index: 1;
 }
 
 .carte-projet .titre-projet {
-    font-size: 1.4rem;   /* un peu plus petit qu’avant */
+    font-size: 1.4rem;
     margin: 0;
-    text-align: left;
-    color:#fff
+    color: #fff;
 }
 
-.carte-projet .btn-projet {
-    background-color: #fff;
-    color: #000;
-    padding: 6px 12px;       /* bouton plus compact */
-    font-size: 0.85rem;      /* texte plus petit */
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+.projets-page-wrapper .grille-projets {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+    gap: 40px;  /* espace entre les cartes */
+    max-width: 1200px; /* largeur max du container */
+    margin: 0 auto;    /* centre le tout */
+    padding: 0;
 }
 
+.carte-projet {
+  margin: 0; /* supprime tout espace ajouté individuellement */
+}
+
+/* bouton final (bordure blanche, fond transparent) */
 .carte-projet .btn-projet {
     display: inline-block;
-    background: transparent;         /* fond transparent */
-    border: 2px solid #fff;          /* bordure blanche (ou ta couleur principale) */
-    color: #fff;                     /* texte blanc */
-    font-size: 0.85rem;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: .85rem;
     padding: 6px 14px;
     border-radius: 30px;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
 }
 
 .carte-projet .btn-projet:hover {
-    background: #fff;                 /* au survol : fond blanc */
-    color: #000;                      /* texte noir */
+    background: #fff;
+    color: #000;
 }
 
-/* bouton retour page projet*/ 
-
+/* Bouton retour aux projets */
 .retour-projets {
     text-align: center;
     margin: 40px 0;
 }
 
+.retour-projets .btn-retour,
 .btn-retour {
     display: inline-block;
-    background-color: #fff;
+    background: #fff;
     color: #333;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 25px;
     font-weight: bold;
     text-decoration: none;
@@ -379,6 +300,7 @@ main,
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
+.retour-projets .btn-retour:hover,
 .btn-retour:hover {
     background-color: #f0f0f0;
 }
@@ -395,7 +317,7 @@ main,
 .form-contact input[type="submit"] {
     display: block !important;
     float: none !important;
-    margin: 20px auto 0 auto; /* Centre le bouton */
+    margin: 20px auto 0;
     padding: 10px 20px !important;
     background: linear-gradient(to right, #e27ba3, #c883f4);
     color: white;
@@ -408,7 +330,7 @@ main,
 
 .form-contact input[type="submit"]:hover {
     transform: scale(1.05);
-    border: 2px solid #000!important; /* Contour noir */
+    border: 2px solid #000 !important;
 }
 
 .wpcf7:hover,
@@ -417,15 +339,14 @@ main,
 }
 
 /* Bouton retour en haut */
-
 .back-to-top {
     position: fixed;
     right: 30px;
     bottom: 30px;
     margin-bottom: 50px;
-    font-size: 45px;   /* taille du caret */
-    font-weight: bold; /* le caret sera plus visible */
-    color: white;      /* couleur de la flèche */
+    font-size: 45px;
+    font-weight: bold;
+    color: white;
     text-decoration: none;
     line-height: 1;
     z-index: 9999;
@@ -433,20 +354,21 @@ main,
 }
 
 .back-to-top:hover {
-    transform: translateY(-6px); /* petit effet de montée */
-    color: black; /* couleur au survol (optionnel) */
+    transform: translateY(-6px);
+    color: black;
 }
 
-
 /* Défilement fluide */
-html{ scroll-behavior:smooth; }
+html { scroll-behavior: smooth; }
 
 
 
 
 
-@media screen and (max-width: 768px) {
+/* Responsive */
+@media (max-width: 768px) {
 
+  /* Offcanvas header */
     #offcanvas.ct-panel.ct-header.active {
         top: 117px;
         height: calc(100vh - 70px);
@@ -456,13 +378,13 @@ html{ scroll-behavior:smooth; }
         z-index: 9999;
     }
 
-    #offcanvas {
-        width: 100vw;
-        left: 0;
+    #offcanvas { 
+        width: 100vw; 
+        left: 0; 
     }
 
-    #offcanvas .ct-panel-content {
-        width: 100%;
+    #offcanvas .ct-panel-content { 
+        width: 100%; 
     }
 
     #offcanvas .ct-panel-content-inner {
@@ -480,11 +402,10 @@ html{ scroll-behavior:smooth; }
         text-align: center;
     }
 
-    .ct-toggle-close{
-        display:none
+    .ct-toggle-close {
+        display: none;
     }
-    
-    
+
     #offcanvas .mobile-menu a {
         font-size: 1.5rem;
         padding: 1rem;
@@ -496,76 +417,77 @@ html{ scroll-behavior:smooth; }
         width: 100vw;
     }
 
+    /* Galerie single (1 colonne) */
     .single-projet .galerie-projet {
-        grid-template-columns: 1fr; gap:16px; 
+        grid-template-columns: 1fr;
+        gap: 16px;
     }
 
-    .single-projet .galerie-projet li a.portrait{ 
-        width:100%;
-    }
-
-    .single-projet .galerie-projet .paysage,
-    .single-projet .galerie-projet .portrait {
-        width: 90%; /* pleine largeur mais avec un peu de marge */
-    }
-
-/* Réduction des images en portrait uniquement */
-    .single-projet .galerie-projet .portrait img {
-        height: auto;
-        max-height: none;
-        object-fit: contain; /* plus de recadrage */
-    }
-
-    .single-projet .galerie-projet a {
-        display: block;
+    /* Vignettes */
+    .single-projet .galerie-projet li a {
         width: 90%;
         max-width: 500px;
-        border: 2px solid #ddd; /* Bordure légère */
+        margin: 0 auto;
+        border: 2px solid #ddd;
         border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
-    .single-projet .galerie-projet img {
+    .single-projet .galerie-projet li a.portrait {
+        aspect-ratio: 3 / 4;
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .single-projet .galerie-projet li a img {
         width: 100%;
         height: auto;
         display: block;
+        object-fit: contain;
     }
 
+    /* Grille archive -> 1 colonne */
     .entries {
-        grid-template-columns: 1fr;
-    }
+        grid-template-columns: 1fr; }
 
-    .entries .entry-card {
-        width: 100%;
-    }
-
+    /* Cartes projets */
     .carte-projet {
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
     }
 
-    .carte-projet h3 {
-        font-size: 1.2rem;
+    .carte-projet .overlay,
+    .carte-projet .carte-barre {
+        padding: 8px 12px;
+        gap: 12px;
     }
 
+    .carte-projet h3.titre-projet,
+    .carte-projet .titre-projet {
+        font-size: 1rem;
+        max-width: 60%;
+    }
+
+    .carte-projet a.voir-projet,
     .carte-projet .btn-projet {
-        padding: 8px 16px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        padding: 6px 10px;
     }
 
-    .grille-projets {
-    grid-template-columns: 1fr; /* 1 carte par ligne */
-    justify-items: center; /* Centre les cartes horizontalement */
+    .projets-page-wrapper .grille-projets,
+    .projets-page-wrapper .entries {
+        display:grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 32px 20px;
     }
 
-    .carte-projet {
-    width: 90%; /* ou max-width: 500px si tu veux limiter la taille */
-    }
-
-    .back-to-top{
-        display:none;
+    .back-to-top {
+        display: none;
     }
 }
+
 
 
 
