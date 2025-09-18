@@ -206,7 +206,7 @@ main,
     display: inline-block;
     margin-top: 30px;
     padding: 12px 24px;
-    background: transparent;   /* 👈 fond transparent */
+    background: linear-gradient(to right, #e27ba3, #c883f4); /* 👈 fond dégradé */
     color: #fff;               /* 👈 texte blanc */
     border: 2px solid #fff;    /* 👈 bordure blanche */
     border-radius: 30px;
@@ -216,8 +216,8 @@ main,
 }
 .voir-projet{
     display: inline-block;
-    padding: 10px 20px;
-    background: transparent;   /* 👈 fond transparent */
+    padding: 6px 10px;
+    background: linear-gradient(to right, #e27ba3, #c883f4); /* 👈 fond dégradé */
     color: #fff !important;               /* 👈 texte blanc */
     border: 2px solid #fff;    /* 👈 bordure blanche */
     border-radius: 30px;
@@ -227,21 +227,21 @@ main,
 }
 
 .voir-projet:hover {
-    color: #000; /* Texte noir au survol */
+    color: #000!important; /* Texte noir au survol */
     border: 2px solid #000; /* Contour noir */
-    background-color: transparent;
+    background-color: #E0B3FF;
 }
 
 .projet-lien:hover {
-    color: #000; /* Texte noir au survol */
+    color: #000!important; /* Texte noir au survol */
     border: 2px solid #000; /* Contour noir */
-    background-color: transparent;
+    background-color: #E0B3FF;
 }
 
 .retour-projets .btn-retour {
     display: inline-block;
     padding: 12px 24px;
-    background: transparent;   /* 👈 fond transparent */
+    background: linear-gradient(to right, #e27ba3, #c883f4); /* 👈 fond dégradé */
     color: #fff;               /* 👈 texte blanc */
     border: 2px solid #fff;    /* 👈 bordure blanche */
     border-radius: 30px;
@@ -253,7 +253,7 @@ main,
 .retour-projets .btn-retour:hover {
     color: #000; /* Texte noir au survol */
     border: 2px solid #000; /* Contour noir */
-    background-color: transparent;
+    background-color: #E0B3FF;
 }
 
 
@@ -274,6 +274,7 @@ main,
     max-width: 500px;
     background-size: cover;
     background-position: center;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -304,6 +305,7 @@ main,
 .carte-projet::before {
     content: "";
     position: absolute;
+    border-radius: 10px;
     left: 0; right: 0; bottom: 0;
     height: 30%; /* zone couverte en bas */
     background: linear-gradient(to top, rgba(0,0,0,1), transparent);
@@ -406,12 +408,39 @@ main,
 
 .form-contact input[type="submit"]:hover {
     transform: scale(1.05);
+    border: 2px solid #000!important; /* Contour noir */
 }
 
 .wpcf7:hover,
 .wpcf7-submit:hover {
     transform: scale(1.05);
 }
+
+/* Bouton retour en haut */
+
+.back-to-top {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    margin-bottom: 50px;
+    font-size: 45px;   /* taille du caret */
+    font-weight: bold; /* le caret sera plus visible */
+    color: white;      /* couleur de la flèche */
+    text-decoration: none;
+    line-height: 1;
+    z-index: 9999;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.back-to-top:hover {
+    transform: translateY(-6px); /* petit effet de montée */
+    color: black; /* couleur au survol (optionnel) */
+}
+
+
+/* Défilement fluide */
+html{ scroll-behavior:smooth; }
+
 
 
 
@@ -531,6 +560,10 @@ main,
 
     .carte-projet {
     width: 90%; /* ou max-width: 500px si tu veux limiter la taille */
+    }
+
+    .back-to-top{
+        display:none;
     }
 }
 

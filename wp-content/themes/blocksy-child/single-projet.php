@@ -88,20 +88,22 @@ get_header();
     </section>
 
     <!-- Overlay Lightbox (une seule fois sur la page) -->
-    <div id="lightbox" class="lightbox-overlay" aria-hidden="true" role="dialog" aria-label="<?php esc_attr_e('Galerie du projet','textdomain'); ?>">
-        <button class="lightbox-close" aria-label="<?php esc_attr_e('Fermer','textdomain'); ?>">×</button>
-        <button class="lightbox-prev"  aria-label="<?php esc_attr_e('Image précédente','textdomain'); ?>">Précédente</button>
+<div id="lightbox" class="lightbox-overlay" aria-hidden="true" role="dialog" aria-modal="true" tabindex="-1" aria-label="<?php esc_attr_e('Galerie du projet','textdomain'); ?>">
+
+    <!-- bouton fermer -->
+    <button type="button" class="lightbox-close" aria-label="<?php esc_attr_e('Fermer','textdomain'); ?>">×</button>
+
+    <!-- flèches desktop  -->
+    <button type="button" class="lightbox-prev" aria-label="<?php esc_attr_e('Image précédente','textdomain'); ?>">Précédente</button>
 
     <div class="lightbox-image-wrapper" role="document">
         <img id="lightbox-img" src="" alt="">
-        <div class="lightbox-caption">
-            <span class="lightbox-title"></span>
-            <span class="lightbox-category"></span>
-        </div>
     </div>
 
-    <button class="lightbox-next"  aria-label="<?php esc_attr_e('Image suivante','textdomain'); ?>">Suivante</button>
-    </div>
+    <button type="button" class="lightbox-next" aria-label="<?php esc_attr_e('Image suivante','textdomain'); ?>">Suivante</button>
+</div>
+
+
 
 <?php endwhile; endif; ?>
 </main>
