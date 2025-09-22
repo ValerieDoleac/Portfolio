@@ -79,6 +79,14 @@ main,
     justify-content: center;
 }
 
+.portraits{
+    grid-column: span 3;    /* fait prendre toute la largeur */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    justify-self: center;
+}
+
 /* Image dans la carte */
 .single-projet .galerie-projet li a img {
     width: 100%;
@@ -198,7 +206,6 @@ main,
     position: relative;
     aspect-ratio: 1 / 1;
     width: 100%;
-    max-width: 500px;
     background-size: cover;
     background-position: center;
     border-radius: 10px;
@@ -208,6 +215,7 @@ main,
     transition: transform 0.3s ease;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards;
+    margin: 0; /* supprime tout espace ajouté individuellement */
 }
 
 .carte-projet:nth-child(1) { animation-delay: .2s; }
@@ -251,16 +259,20 @@ main,
 
 .projets-page-wrapper .grille-projets {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
-    gap: 40px;  /* espace entre les cartes */
-    max-width: 1200px; /* largeur max du container */
-    margin: 0 auto;    /* centre le tout */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 0;
 }
 
-.carte-projet {
-  margin: 0; /* supprime tout espace ajouté individuellement */
+
+.projets-page-wrapper .grille-projets .carte-projet {
+    width: 100% !important;
+    height: auto;
+    margin: 0;
 }
+
 
 /* bouton final (bordure blanche, fond transparent) */
 .carte-projet .btn-projet {
@@ -281,29 +293,29 @@ main,
     color: #000;
 }
 
+p{
+    color:black
+}
+
 /* Bouton retour aux projets */
-.retour-projets {
-    text-align: center;
-    margin: 40px 0;
-}
-
-.retour-projets .btn-retour,
-.btn-retour {
+.retour-projets .btn-retour {
     display: inline-block;
-    background: #fff;
-    color: #333;
     padding: 12px 24px;
-    border-radius: 25px;
-    font-weight: bold;
+    background: linear-gradient(to right, #e27ba3, #c883f4);
+    color: #fff !important;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    font-weight: 600;
     text-decoration: none;
-    transition: background 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all .3s;
 }
 
-.retour-projets .btn-retour:hover,
-.btn-retour:hover {
-    background-color: #f0f0f0;
+.retour-projets .btn-retour:hover{
+    color: #000 !important;
+    border-color: #000;
+    background-color: #E0B3FF;
 }
+
 
 .site-footer {
     text-align: center;

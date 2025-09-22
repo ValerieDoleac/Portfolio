@@ -11,8 +11,8 @@ get_header();
     // Champs ACF
     $contexte    = get_field('contexte');
     $technos     = get_field('technologies');
-    $lien_site   = get_field('lien');             // URL externe éventuelle
-    $miniature   = get_field('image_projet');     // Image principale (array)
+    $lien_site   = get_field('lien');
+    $miniature   = get_field('image_projet');
 
     // Construit la liste des captures à partir des champs image_1..image_5
     $captures = [];
@@ -53,30 +53,66 @@ get_header();
         <?php endif; ?>
 
         <?php if ( $has_gallery ) : ?>
+            
         <!-- Galerie de 5 vignettes cliquables -->
         <section class="single-projet-galerie">
             <ul class="galerie-projet">
-                <?php foreach ( $captures as $i => $img ) :
-                    $full   = esc_url($img['url']); // plein format
-                    $thumb  = esc_url($img['sizes']['medium_large'] ?? ($img['sizes']['medium'] ?? $img['url']));
-                    $alt    = esc_attr($img['alt'] ?: $titre_page);
-                    $w      = isset($img['width'], $img['height']) ? (int)$img['width'] : 0;
-                    $h      = isset($img['height']) ? (int)$img['height'] : 0;
-                    $orien  = ($h > $w && $w) ? 'portrait' : 'paysage';
-                ?>
-                <li>
-                    <a href="<?php echo $full; ?>"
-                        class="js-lightbox-item <?php echo $orien; ?>"
-                        data-group="proj-<?php echo get_the_ID(); ?>"
-                        data-index="<?php echo $i; ?>"
-                        data-title="<?php echo $alt; ?>"
-                        data-category="Capture">
-                        <img src="<?php echo $thumb; ?>" alt="<?php echo $alt; ?>">
-                    </a>
+                <?php
+                // Séparer paysage / portrait
+                $paysage  = [];
+                $portrait = [];
+
+                foreach ($captures as $img) {
+                    $w = (int)($img['width']  ?? 0);
+                    $h = (int)($img['height'] ?? 0);
+                    if ($h > $w && $w) {
+                        $portrait[] = $img;
+                    } else {
+                        $paysage[] = $img;
+                    }
+                }
+
+                // paysages (ligne 1)
+                foreach ($paysage as $i => $img) {
+                    $full  = esc_url($img['url']);
+                    $thumb = esc_url($img['sizes']['medium_large'] ?? ($img['sizes']['medium'] ?? $img['url']));
+                    $alt   = esc_attr($img['alt'] ?? $titre_page);
+                    ?>
+                    <li class="capture paysage">
+                        <a href="<?= $full ?>"
+                            class="js-lightbox-item paysage"
+                            data-group="proj-<?= get_the_ID(); ?>"
+                            data-index="<?= $i; ?>"
+                            data-title="<?= $alt; ?>"
+                            data-category="Capture">
+                            <img src="<?= $thumb ?>" alt="<?= $alt ?>">
+                        </a>
+                    </li>
+                <?php } ?>
+
+                <!-- portraits (ligne 2, centrés) -->
+                <li class="portraits">
+                    <?php foreach ($portrait as $j => $img) {
+                        $full  = esc_url($img['url']);
+                        $thumb = esc_url($img['sizes']['medium_large'] ?? ($img['sizes']['medium'] ?? $img['url']));
+                        $alt   = esc_attr($img['alt'] ?? $titre_page);
+                      // index global pour la lightbox
+                        $index = count($paysage) + $j;
+                        ?>
+                        <a href="<?= $full ?>"
+                            class="js-lightbox-item portrait"
+                            data-group="proj-<?= get_the_ID(); ?>"
+                            data-index="<?= $index; ?>"
+                            data-title="<?= $alt; ?>"
+                            data-category="Capture">
+                        <img src="<?= $thumb ?>" alt="<?= $alt ?>">
+                        </a>
+                    <?php } ?>
                 </li>
-                <?php endforeach; ?>
             </ul>
         </section>
+
+
         <?php endif; ?>
 
                 <!-- Bouton retour -->
