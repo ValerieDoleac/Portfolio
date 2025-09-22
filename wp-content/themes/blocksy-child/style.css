@@ -407,7 +407,7 @@ html { scroll-behavior: smooth; }
         height: 100vh !important;
         width: 100vw !important;
         padding: 0 !important;
-        background-color: #1a1a1a;
+        background-color: #af1ce1;
     }
 
     #offcanvas .mobile-menu {
@@ -429,34 +429,43 @@ html { scroll-behavior: smooth; }
         width: 100vw;
     }
 
-    /* Galerie single (1 colonne) */
+    /* --- Galerie en 1 colonne --- */
     .single-projet .galerie-projet {
-        grid-template-columns: 1fr;
-        gap: 16px;
+      grid-template-columns: 1fr;   /* 1 seule colonne */
+      gap: 30px;                    /* espace vertical entre les cartes */
+      margin: 20px auto 40px;       /* centré */
     }
 
-    /* Vignettes */
+    /* toutes les vignettes occupent 100% */
     .single-projet .galerie-projet li a {
-        width: 90%;
-        max-width: 500px;
+        width: 100%;
         margin: 0 auto;
-        border: 2px solid #ddd;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
+    /* ratio paysage */
+    .single-projet .galerie-projet li a.paysage {
+        aspect-ratio: 16 / 10;
+    }
+
+  /* ratio portrait */
     .single-projet .galerie-projet li a.portrait {
-        aspect-ratio: 3 / 4;
-        width: 90%;
-        max-width: 500px;
+    aspect-ratio: 3 / 4;
     }
 
+    /* si tu as un <li class="portraits"> qui regroupe deux images, 
+       il doit aussi passer en 1 colonne */
+    .single-projet .galerie-projet li.portraits {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 1fr;   /* force en 1 colonne */
+        gap: 20px;
+    }
+
+    /* images */
     .single-projet .galerie-projet li a img {
         width: 100%;
-        height: auto;
-        display: block;
-        object-fit: contain;
+        height: 100%;
+        object-fit: cover;
     }
 
     /* Grille archive -> 1 colonne */
