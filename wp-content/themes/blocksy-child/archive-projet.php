@@ -5,12 +5,20 @@
 
 get_header(); ?>
 
+
 <!-- Section hero -->
-<section class="hero-projets">
+<section class="hero-projets"
+    data-bg="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/hero-projets-1920.webp"
+    data-bg-fallback="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/hero-projets-1920.jpg">
     <div class="container">
         <h2 class="titre-projets">Projets</h2>
     </div>
 </section>
+
+
+
+
+
 
 <main id="primary" class="projets-page-wrapper container">
 
@@ -25,7 +33,7 @@ get_header(); ?>
     </div>
 
     <?php
-    // Pagination si nécessaire (selon ton thème)
+    // Pagination
     the_posts_pagination( array(
         'mid_size'  => 2,
         'prev_text' => __('← Précédent', 'textdomain'),

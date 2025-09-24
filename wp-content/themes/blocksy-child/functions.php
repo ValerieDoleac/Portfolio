@@ -2,9 +2,7 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-/* ============================================================
- * Child Theme Configurator (laisser tel quel)
- * ============================================================ */
+
 if ( ! function_exists( 'chld_thm_cfg_locale_css' ) ):
     function chld_thm_cfg_locale_css( $uri ){
         if ( empty( $uri ) && is_rtl() && file_exists( get_template_directory() . '/rtl.css' ) )
@@ -25,11 +23,8 @@ if ( ! function_exists( 'child_theme_configurator_css' ) ):
 endif;
 add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css', 10 );
 
-/* ============================================================
- * Helpers
- * ============================================================ */
 
-/** Version de fichier basée sur filemtime si possible, sinon version du thème. */
+
 function vd_asset_version( $relative_path ) {
     $abs = trailingslashit( get_stylesheet_directory() ) . ltrim( $relative_path, '/\\' );
     if ( file_exists( $abs ) ) {
@@ -40,12 +35,17 @@ function vd_asset_version( $relative_path ) {
     return $theme->get( 'Version' ) ?: '1.0.0';
 }
 
-/* ============================================================
- * Enqueue des assets du thème enfant
- * ============================================================ */
+/** Contexte où le parallax (hero projets) doit être chargé */
+function vd_has_projects_hero() {
+    // archive du CPT + une page "projets" OU "portfolio"
+    return is_post_type_archive('projet') || is_page( array('projets','portfolio') );
+}
+
+
+/* les enqueues */
 function vd_enqueue_child_assets() {
 
-    // --- Lightbox UNIQUEMENT sur la page d'un projet
+    /* lightbox sur la page "projet" */
     if ( is_singular( 'projet' ) ) {
 
         // CSS lightbox
@@ -60,21 +60,21 @@ function vd_enqueue_child_assets() {
             );
         }
 
-        // JS lightbox (vanilla)
+        // JS lightbox
         $lb_js_rel = 'assets/js/portfolio-lightbox.js';
         $lb_js_abs = trailingslashit( get_stylesheet_directory() ) . $lb_js_rel;
         if ( file_exists( $lb_js_abs ) ) {
             wp_enqueue_script(
                 'vd-portfolio-lightbox',
                 get_stylesheet_directory_uri() . '/' . $lb_js_rel,
-                array(),
+                array(), // ajoute 'jquery' si tu l'utilises
                 vd_asset_version( $lb_js_rel ),
                 true
             );
         }
     }
 
-    // --- JS global (si présent)
+
     $custom_js_rel = 'assets/js/custom.js';
     $custom_js_abs = trailingslashit( get_stylesheet_directory() ) . $custom_js_rel;
     if ( file_exists( $custom_js_abs ) ) {
@@ -88,6 +88,7 @@ function vd_enqueue_child_assets() {
     }
 }
 add_action( 'wp_enqueue_scripts', 'vd_enqueue_child_assets', 20 );
+
 
 
 

@@ -13,7 +13,7 @@ Updated: 2025-08-04 18:16:37
 main,
 .site-main,
 .main-container {
-    background: linear-gradient(135deg, #9b51e0, #ff6f61);
+    background: radial-gradient(circle at center, #8a4be6 0%, #d8689a 100%);
 }
 
 /* Single projet */
@@ -263,7 +263,7 @@ main,
     gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0;
+    padding: 50px 20px;
 }
 
 
@@ -373,6 +373,36 @@ p{
 /* Défilement fluide */
 html { scroll-behavior: smooth; }
 
+section.hero-projets {
+    position: relative;
+    min-height: 48vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Overlay dégradé */
+section.hero-projets::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, #8a4be6 0%, #d8689a 100%);
+    opacity: 0.6; /* règle la transparence */
+    z-index: 1;
+}
+
+/* Contenu au-dessus */
+section.hero-projets .container {
+    position: relative;
+    z-index: 2;
+}
+
+
+
+
 
 
 
@@ -399,23 +429,54 @@ html { scroll-behavior: smooth; }
         width: 100%; 
     }
 
-    #offcanvas .ct-panel-content-inner {
-        display: flex !important;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh !important;
-        width: 100vw !important;
-        padding: 0 !important;
-        background-color: #af1ce1;
+     /* Offcanvas aligné sous la navbar */
+    #offcanvas.ct-panel.ct-header.active {
+        top: 70px;          /* hauteur de ta navbar */
+        left: 0;
+        width: 100vw;       /* pleine largeur */
+        height: calc(100vh - 70px); /* hauteur de l'écran moins la navbar */
     }
 
-    #offcanvas .mobile-menu {
-        text-align: center;
+    /* Fond violet partout dans le panneau (on écrase tous fonds noirs) */
+    #offcanvas,
+    #offcanvas .ct-panel-content,
+    #offcanvas .ct-panel-content-inner{
+        background: #9b51e0 !important;      /* violet */
     }
+
+    /* On retire les marges/paddings qui faisaient apparaître du noir */
+    #offcanvas .ct-panel-content,
+    #offcanvas .ct-panel-content-inner {
+        padding: 0 !important;
+    }
+
+    /* Centrage parfait du menu dans le panneau */
+    #offcanvas .ct-panel-content-inner {
+        display: flex !important;
+        align-items: center;                  /* centre verticalement */
+        justify-content: center;              /* centre horizontalement */
+        min-height: 100%;
+    }
+
+
 
     .ct-toggle-close {
         display: none;
+    }
+
+    #offcanvas .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;                            /* espace entre les liens */
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 40px 24px;                   /* un peu d’air autour */
+    }
+
+    #offcanvas .mobile-menu li {
+        width: 100%;
+        text-align: center;
     }
 
     #offcanvas .mobile-menu a {
@@ -507,6 +568,11 @@ html { scroll-behavior: smooth; }
     .back-to-top {
         display: none;
     }
+
+    .hero-projets{ 
+        min-height:40vh; 
+    }
+
 }
 
 
