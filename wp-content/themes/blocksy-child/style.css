@@ -215,7 +215,7 @@ main,
     transition: transform 0.3s ease;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards;
-    margin: 0; /* supprime tout espace ajouté individuellement */
+    margin: 0;
 }
 
 .carte-projet:nth-child(1) { animation-delay: .2s; }
@@ -370,35 +370,49 @@ p{
     color: black;
 }
 
-/* Défilement fluide */
-html { scroll-behavior: smooth; }
-
-section.hero-projets {
+/* parallax pour le h2 projets */
+.page-hero {
+    padding: 30px 20px;
+    text-align: center;
     position: relative;
-    min-height: 48vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    overflow: hidden;
 }
 
-/* Overlay dégradé */
-section.hero-projets::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, #8a4be6 0%, #d8689a 100%);
-    opacity: 0.6; /* règle la transparence */
-    z-index: 1;
+.page-hero .page-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: black;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.8s ease forwards;
 }
 
-/* Contenu au-dessus */
-section.hero-projets .container {
-    position: relative;
-    z-index: 2;
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
+
+/* Animation des h3 sur la page a propos */
+body.page-id-12 h3.elementor-heading-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: black;
+    text-align: center;
+    margin: 40px 0 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+
+/* Quand visible */
+body.page-id-12 h3.elementor-heading-title.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 
 
@@ -431,17 +445,11 @@ section.hero-projets .container {
 
      /* Offcanvas aligné sous la navbar */
     #offcanvas.ct-panel.ct-header.active {
-        top: 70px;          /* hauteur de ta navbar */
+        top: 110px;
         left: 0;
-        width: 100vw;       /* pleine largeur */
-        height: calc(100vh - 70px); /* hauteur de l'écran moins la navbar */
-    }
-
-    /* Fond violet partout dans le panneau (on écrase tous fonds noirs) */
-    #offcanvas,
-    #offcanvas .ct-panel-content,
-    #offcanvas .ct-panel-content-inner{
-        background: #9b51e0 !important;      /* violet */
+        width: 100vw;
+        height: calc(100vh - 110px);
+        background: linear-gradient(135deg, #8a4be6 0%, #d8689a 100%);
     }
 
     /* On retire les marges/paddings qui faisaient apparaître du noir */
@@ -453,12 +461,10 @@ section.hero-projets .container {
     /* Centrage parfait du menu dans le panneau */
     #offcanvas .ct-panel-content-inner {
         display: flex !important;
-        align-items: center;                  /* centre verticalement */
-        justify-content: center;              /* centre horizontalement */
+        align-items: center;
+        justify-content: center;
         min-height: 100%;
     }
-
-
 
     .ct-toggle-close {
         display: none;
@@ -467,11 +473,11 @@ section.hero-projets .container {
     #offcanvas .mobile-menu {
         display: flex;
         flex-direction: column;
-        gap: 28px;                            /* espace entre les liens */
+        gap: 28px;
         align-items: center;
         justify-content: center;
         width: 100%;
-        padding: 40px 24px;                   /* un peu d’air autour */
+        padding: 40px 24px;
     }
 
     #offcanvas .mobile-menu li {
@@ -484,17 +490,25 @@ section.hero-projets .container {
         padding: 1rem;
     }
 
-    .ct-panel-overlay {
-        top: 70px;
-        height: calc(100vh - 70px);
-        width: 100vw;
+
+
+    /* Liens du menu */
+    #offcanvas .mobile-menu a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
     }
 
-    /* --- Galerie en 1 colonne --- */
+    #offcanvas .mobile-menu a:hover,
+    #offcanvas .mobile-menu a:focus {
+        opacity: .9;
+    }
+
+    /* Galerie en 1 colonne */
     .single-projet .galerie-projet {
-      grid-template-columns: 1fr;   /* 1 seule colonne */
-      gap: 30px;                    /* espace vertical entre les cartes */
-      margin: 20px auto 40px;       /* centré */
+        grid-template-columns: 1fr;
+        gap: 30px;
+        margin: 20px auto 40px;
     }
 
     /* toutes les vignettes occupent 100% */
@@ -513,12 +527,11 @@ section.hero-projets .container {
     aspect-ratio: 3 / 4;
     }
 
-    /* si tu as un <li class="portraits"> qui regroupe deux images, 
-       il doit aussi passer en 1 colonne */
+
     .single-projet .galerie-projet li.portraits {
         grid-column: 1 / -1;
         display: grid;
-        grid-template-columns: 1fr;   /* force en 1 colonne */
+        grid-template-columns: 1fr;
         gap: 20px;
     }
 
@@ -529,7 +542,7 @@ section.hero-projets .container {
         object-fit: cover;
     }
 
-    /* Grille archive -> 1 colonne */
+    /* Grille articles */
     .entries {
         grid-template-columns: 1fr; }
 

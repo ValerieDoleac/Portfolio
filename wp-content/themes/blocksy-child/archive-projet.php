@@ -7,13 +7,10 @@ get_header(); ?>
 
 
 <!-- Section hero -->
-<section class="hero-projets"
-    data-bg="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/hero-projets-1920.webp"
-    data-bg-fallback="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/hero-projets-1920.jpg">
-    <div class="container">
-        <h2 class="titre-projets">Projets</h2>
-    </div>
+<section class="page-hero">
+    <h2 class="page-title">Projets</h2>
 </section>
+
 
 
 

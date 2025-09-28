@@ -10,34 +10,27 @@ document.addEventListener("DOMContentLoaded", function () {
     offcanvas.style.backgroundColor = "#1a1a1a";
 });
 
-// chargement de l'image de fond
+// Animation des titres h3 dans la page "À propos"
 document.addEventListener('DOMContentLoaded', function () {
-    const section = document.querySelector('section.hero-projets');
-    if (!section) return;
+    // Titres H3 de la page À propos (ID = 12)
+    const targets = document.querySelectorAll('body.page-id-12 h3.elementor-heading-title');
+    if (!targets.length) return;
 
-    const webp = section.getAttribute('data-bg');
-    const fallback = section.getAttribute('data-bg-fallback') || webp;
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            } else {
+                entry.target.classList.remove('in-view'); // rejoue quand on remonte
+            }
+        });
+    }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
 
-    const img = new Image();
-    img.onload = () => {
-        section.style.backgroundImage = `url('${webp}')`;
-    };
-    img.onerror = () => {
-        section.style.backgroundImage = `url('${fallback}')`;
-    };
-    img.src = webp;
+    targets.forEach(el => io.observe(el));
 });
 
-// ============================================================
-// HERO PROJETS : Effet Parallax fluide au scroll
-// ============================================================
-document.addEventListener("scroll", function () {
-    const section = document.querySelector("section.hero-projets");
-    if (!section) return;
 
-    let offset = window.pageYOffset;
-    section.style.backgroundPositionY = -(offset * 0.3) + "px";
-    // 0.3 = vitesse (plus petit = plus lent)
-});
+
+
 
 
