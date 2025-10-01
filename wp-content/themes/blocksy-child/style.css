@@ -334,20 +334,15 @@ p{
     background: linear-gradient(to right, #e27ba3, #c883f4);
     color: white;
     border: none;
-    border-radius: 15px;
+    border-radius: 30px!important;
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
 
 .form-contact input[type="submit"]:hover {
-    transform: scale(1.05);
     border: 2px solid #000 !important;
-}
-
-.wpcf7:hover,
-.wpcf7-submit:hover {
-    transform: scale(1.05);
+    background: linear-gradient(to right, #e27ba3, #c883f4);
 }
 
 /* Bouton retour en haut */
@@ -419,10 +414,9 @@ body.page-id-12 h3.elementor-heading-title.in-view {
 
 
 
-
-
 /* Responsive */
 @media (max-width: 768px) {
+
 
   /* Offcanvas header */
     #offcanvas.ct-panel.ct-header.active {
@@ -435,6 +429,7 @@ body.page-id-12 h3.elementor-heading-title.in-view {
     }
 
     #offcanvas { 
+        display: block !important;
         width: 100vw; 
         left: 0; 
     }
@@ -449,7 +444,6 @@ body.page-id-12 h3.elementor-heading-title.in-view {
         left: 0;
         width: 100vw;
         height: calc(100vh - 110px);
-        background: linear-gradient(135deg, #8a4be6 0%, #d8689a 100%);
     }
 
     /* On retire les marges/paddings qui faisaient apparaître du noir */
@@ -485,23 +479,28 @@ body.page-id-12 h3.elementor-heading-title.in-view {
         text-align: center;
     }
 
-    #offcanvas .mobile-menu a {
+    #offcanvas .mobile-menu li a.ct-menu-link {
         font-size: 1.5rem;
         padding: 1rem;
     }
 
+    #offcanvas .ct-panel-inner{
+        max-width: 100% !important;
+        background: linear-gradient(135deg, #8a4be6 0%, #d8689a 100%);
+    }
 
 
     /* Liens du menu */
-    #offcanvas .mobile-menu a {
-        color: #fff;
+    #offcanvas .ct-panel-content-inner nav.mobile-menu a.ct-menu-link {
+        color: #fff !important;
         text-decoration: none;
         font-weight: 700;
+        transition: color .25s ease;
     }
 
-    #offcanvas .mobile-menu a:hover,
-    #offcanvas .mobile-menu a:focus {
-        opacity: .9;
+    /* Hover / focus -> noir */
+    #offcanvas .ct-panel-content-inner nav.mobile-menu a.ct-menu-link:hover{
+        color: #000 !important;
     }
 
     /* Galerie en 1 colonne */
@@ -587,8 +586,6 @@ body.page-id-12 h3.elementor-heading-title.in-view {
     }
 
 }
-
-
 
 
 
