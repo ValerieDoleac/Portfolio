@@ -317,14 +317,6 @@ p{
 }
 
 
-.site-footer {
-    text-align: center;
-    padding: 20px 0;
-    font-size: 14px;
-    color: black;
-    background-color: white;
-}
-
 /* Formulaire de contact */
 .form-contact input[type="submit"] {
     display: block !important;
@@ -345,25 +337,6 @@ p{
     background: linear-gradient(to right, #e27ba3, #c883f4);
 }
 
-/* Bouton retour en haut */
-.back-to-top {
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-    margin-bottom: 50px;
-    font-size: 45px;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-    line-height: 1;
-    z-index: 9999;
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.back-to-top:hover {
-    transform: translateY(-6px);
-    color: black;
-}
 
 /* parallax pour le h2 projets */
 .page-hero {
@@ -411,9 +384,6 @@ body.page-id-12 h3.elementor-heading-title.in-view {
 
 
 
-
-
-
 /* Responsive */
 @media (max-width: 768px) {
 
@@ -438,13 +408,7 @@ body.page-id-12 h3.elementor-heading-title.in-view {
         width: 100%; 
     }
 
-     /* Offcanvas aligné sous la navbar */
-    #offcanvas.ct-panel.ct-header.active {
-        top: 110px;
-        left: 0;
-        width: 100vw;
-        height: calc(100vh - 110px);
-    }
+
 
     /* On retire les marges/paddings qui faisaient apparaître du noir */
     #offcanvas .ct-panel-content,
@@ -498,10 +462,6 @@ body.page-id-12 h3.elementor-heading-title.in-view {
         transition: color .25s ease;
     }
 
-    /* Hover / focus -> noir */
-    #offcanvas .ct-panel-content-inner nav.mobile-menu a.ct-menu-link:hover{
-        color: #000 !important;
-    }
 
     /* Galerie en 1 colonne */
     .single-projet .galerie-projet {
